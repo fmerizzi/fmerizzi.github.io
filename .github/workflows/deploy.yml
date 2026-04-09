@@ -1,0 +1,59 @@
+name: Deploy Eleventy site
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npx @11ty/eleventy
+
+      - name: Show build output
+        run: |
+          echo "PWD:"
+          pwd
+          echo ""
+          echo "Repository root:"
+          find . -maxdepth 2 | sort
+          echo ""
+          echo "_site contents:"
+          find _site -maxdepth 3 | sort
+
+      - name: Verify homepage exists
+        run: test -f _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
