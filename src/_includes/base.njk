@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "Personal Website" }}</title>
+    <meta name="description" content="{{ description or 'A minimal personal site built with Eleventy.' }}">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="/">Name Surname</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#publications">Publications</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page">
+      {{ content | safe }}
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Name Surname</p>
+    </footer>
+  </body>
+</html>
