@@ -28,6 +28,20 @@ jobs:
       - name: Build site
         run: npx @11ty/eleventy
 
+      - name: Show build output
+        run: |
+          echo "PWD:"
+          pwd
+          echo ""
+          echo "Repository root:"
+          find . -maxdepth 2 | sort
+          echo ""
+          echo "_site contents:"
+          find _site -maxdepth 3 | sort
+
+      - name: Verify homepage exists
+        run: test -f _site/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
