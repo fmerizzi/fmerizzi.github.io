@@ -41,6 +41,13 @@ description: personal homepage
   </ul>
 </section>
 
+<section id="awards" class="content-section">
+  <h2><span class="tag2">Awards</span></h2>
+  <ul>
+    <li>Distinguished Research Award in Forecasting - IOCFC2026</li>
+  </ul>
+</section>
+
 <section id="publications" class="content-section">
   <h2><span class="tag">publications</span></h2>
   <ul class="pub-list">
